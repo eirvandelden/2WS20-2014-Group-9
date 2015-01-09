@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   root 'calculate#index'
   get 'guiltfree_days' => 'calculate#guiltfree_days'
   get 'checked_boxes' => 'calculate#checked_boxes'
+  get 'prize_value' => 'calculate#prize_value'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

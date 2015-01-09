@@ -1,0 +1,6 @@
+<%= form_tag('/prize_value', method: :get) do %>
+  <%= label_tag :type, 'v: Soort lot [6,5,4,3,0]' %>
+  <%= text_field_tag :type %><br />
+
+  <%= submit_tag("Bereken") %>
+<% end %>

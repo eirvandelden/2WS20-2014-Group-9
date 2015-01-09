@@ -1,4 +1,5 @@
 class CalculateController < ApplicationController
+  PRIZE_MONEY = { 6 => 0, 5 => 50, 4 => 25, 3 => 10 }
 
   def index
   end
@@ -17,6 +18,15 @@ class CalculateController < ApplicationController
     v = params[:identical].to_i #v
 
     @result = calc_checked_boxes v, x, sigma
+  end
+
+  def prize_value
+    v = params[:type].to_i
+
+    @result = PRIZE_MONEY[v]
+  end
+
+  def expected_value_type
   end
 
 private
