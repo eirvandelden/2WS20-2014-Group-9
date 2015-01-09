@@ -1,0 +1,13 @@
+<%= form_tag('/checked_boxes', method: :get) do %>
+  <%= label_tag :number, 'x: Aantal [>v]' %>
+  <%= text_field_tag :number %><br />
+
+  <%= label_tag :ticket, 'sigma: Soort lot [6,5,4,3,0]' %>
+  <%= text_field_tag :ticket %><br />
+
+  <%= label_tag :identical, 'v: Aantal identieke categorieen, opengekrast' %>
+  <%= text_field_tag :identical %><br />
+
+  <%= submit_tag("Bereken") %>
+<% end %>
+
