@@ -4,11 +4,11 @@ class CalculateController < ApplicationController
   def index
   end
 
-  def guiltfree_days
+  def complaintfree_days
     d = params[:days].to_i
     p = params[:probability].to_f
 
-    @result = calc_guiltfree_days d, p
+    @result = calc_complaintfree_days d, p
   end
 
   def checked_boxes
@@ -35,7 +35,7 @@ private
     (0...r).inject(1) do |m,i| (m * (n - i)) / (i + 1) end
   end
 
-  def calc_guiltfree_days d, p
+  def calc_complaintfree_days d, p
     bin_co(6, d) * p**d * (1-p)**(6-d)
   end
 

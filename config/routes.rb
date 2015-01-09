@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'calculate#index'
-  get 'guiltfree_days' => 'calculate#guiltfree_days'
+  get 'complaintfree_days' => 'calculate#guiltfree_days'
   get 'checked_boxes' => 'calculate#checked_boxes'
   get 'prize_value' => 'calculate#prize_value'
 
