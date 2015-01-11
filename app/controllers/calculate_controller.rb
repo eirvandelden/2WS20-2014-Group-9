@@ -23,7 +23,7 @@ class CalculateController < ApplicationController
   def prize_value
     v = params[:type].to_i
 
-    @result = PRIZE_MONEY[v]
+    @result = calc_prize_money v
   end
 
   def expected_value_type
@@ -42,4 +42,9 @@ private
   def calc_checked_boxes v, x, sigma
     ( bin_co(sigma, v) * bin_co((6.to_f - sigma), (x-v)) ) / bin_co(6.to_f, x)
   end
+
+  def calc_prize_money v
+    PRIZE_MONEY[v] || 0
+  end
+
 end
