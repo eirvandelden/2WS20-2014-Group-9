@@ -1,0 +1,22 @@
+<%= form_tag("/weekly_value", method: :get) do %>
+  <%= label_tag :six, 'Hoeveel kaarten met 6 identieke plaatjes:' %>
+  <%= text_field_tag :six %><br/>
+
+  <%= label_tag :five, 'Hoeveel kaarten met 5 identieke plaatjes:' %>
+  <%= text_field_tag :five %><br />
+
+  <%= label_tag :four, 'Hoeveel kaarten met 4 identieke plaatjes:' %>
+  <%= text_field_tag :four %><br />
+
+  <%= label_tag :three, 'Hoeveel kaarten met 3 identieke plaatjes:' %>
+  <%= text_field_tag :three %><br />
+
+  <%= label_tag :other, 'Hoeveel kaarten met minder identieke plaatjes:' %>
+  <%= text_field_tag :other %><br />
+
+  <%= label_tag(:probability, "Kans op geen klachten (0 <= x <= 1)[begint met een punt!]:") %>
+  <%= text_field_tag(:probability) %><br />
+
+  <%= submit_tag("Bereken") %>
+<% end %>
+

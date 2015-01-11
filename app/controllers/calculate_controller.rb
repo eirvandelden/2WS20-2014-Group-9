@@ -26,7 +26,23 @@ class CalculateController < ApplicationController
     @result = calc_prize_money v
   end
 
-  def expected_value_type
+  def expected_value_ticket
+    p = params[:probability].to_i
+    sigma = params[:type].to_i
+
+    @result = calc_expected_value_ticket p, sigma
+  end
+
+  def weekly_value
+    six = params[:six].to_i
+    five = params[:five].to_i
+    four = params[:four].to_i
+    three = params[:three].to_i
+    other = params[:other].to_i
+
+    p = params[:probability].to_i
+
+    @result = calc_weekly_value six, five, four, three, other, p
   end
 
 private
@@ -47,4 +63,26 @@ private
     PRIZE_MONEY[v] || 0
   end
 
+  def calc_expected_value_ticket p, sigma
+    result_v = 0
+    result_x = 0
+
+    for x in 0..6 do
+      for v in 0..6 do
+        result_v += calc_prize_money(v) * calc_checked_boxes(v, x, sigma)
+      end
+      result_x += result_v * calc_complaintfree_days(x, p)
+      result_v = 0
+    end
+
+    result_x
+  end
+
+  def calc_weekly_value six, five, four, three, other, p
+    (six * calc_expected_value_ticket(p, 6)) +
+    (five  * calc_expected_value_ticket(p, 6)) +
+    (four  * calc_expected_value_ticket(p, 4)) +
+    (three * calc_expected_value_ticket(p, 3)) +
+    (other * calc_expected_value_ticket(p, 2))
+  end
 end

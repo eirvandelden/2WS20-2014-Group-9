@@ -4,9 +4,11 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'calculate#index'
-  get 'complaintfree_days' => 'calculate#guiltfree_days'
+  get 'complaintfree_days' => 'calculate#complaintfree_days'
   get 'checked_boxes' => 'calculate#checked_boxes'
   get 'prize_value' => 'calculate#prize_value'
+  get 'expected_value_ticket' => 'calculate#expected_value_ticket'
+  get 'weekly_value' => 'calculate#weekly_value'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
