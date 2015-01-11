@@ -74,7 +74,7 @@ private
     result_x = 0
 
     for x in 0..6 do
-      for v in 0..6 do
+      for v in 0..sigma do
         result_v += calc_prize_money(v) * calc_checked_boxes(v, x, sigma)
       end
       result_x += result_v * calc_complaintfree_days(x, p)
