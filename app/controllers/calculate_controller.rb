@@ -27,7 +27,7 @@ class CalculateController < ApplicationController
   end
 
   def expected_value_ticket
-    p = params[:probability].to_i
+    p = params[:probability].to_f
     sigma = params[:type].to_i
 
     @result = calc_expected_value_ticket p, sigma
@@ -40,7 +40,7 @@ class CalculateController < ApplicationController
     three = params[:three].to_i
     other = params[:other].to_i
 
-    p = params[:probability].to_i
+    p = params[:probability].to_f
 
     @result = calc_weekly_value six, five, four, three, other, p
   end
