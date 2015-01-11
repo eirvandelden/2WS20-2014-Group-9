@@ -17,6 +17,15 @@
   <%= label_tag(:probability, "Kans op geen klachten (0 <= x <= 1)[begint met een punt!]:") %>
   <%= text_field_tag(:probability) %><br />
 
+  <%= label_tag :a, 'Hoeveel troostprijzen soort a:' %>
+  <%= text_field_tag :a %><br />
+
+  <%= label_tag :b, 'Hoeveel troostprijzen soort b:' %>
+  <%= text_field_tag :b %><br />
+
+  <%= label_tag :c, 'Hoeveel troostprijzen soort c:' %>
+  <%= text_field_tag :c %><br />
+
   <%= submit_tag("Bereken") %>
 <% end %>
 

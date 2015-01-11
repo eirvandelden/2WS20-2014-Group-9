@@ -39,11 +39,17 @@ class CalculateController < ApplicationController
     four = params[:four].to_i
     three = params[:three].to_i
     other = params[:other].to_i
+    a = params[:a].to_i
+    b = params[:b].to_i
+    c = params[:c].to_i
 
     p = params[:probability].to_f
 
-    @result = calc_weekly_value six, five, four, three, other, p
+    @result = calc_weekly_value six, five, four, three, other, p, a, b, c
   end
+
+#expected_value_week
+#expected_value_total
 
 private
 
@@ -78,11 +84,13 @@ private
     result_x
   end
 
-  def calc_weekly_value six, five, four, three, other, p
+  def calc_weekly_value six, five, four, three, other, p, a, b, c
     (six * calc_expected_value_ticket(p, 6)) +
     (five  * calc_expected_value_ticket(p, 6)) +
     (four  * calc_expected_value_ticket(p, 4)) +
     (three * calc_expected_value_ticket(p, 3)) +
-    (other * calc_expected_value_ticket(p, 2))
+    (a * 2.5 * calc_complaintfree_days(6, p)) +
+    (b * 5.0 * calc_complaintfree_days(6, p)) +
+    (c * 7.5 * calc_complaintfree_days(6, p))
   end
 end
