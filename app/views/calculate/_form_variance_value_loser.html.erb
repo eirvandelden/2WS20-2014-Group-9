@@ -1,0 +1,10 @@
+<%= form_tag("/variance_value_loser", method: :get) do %>
+  <%= label_tag(:probability, "Kans op geen klachten (0 <= x <= 1)[begint met een punt!]:") %>
+  <%= text_field_tag(:probability) %><br>
+
+  <%= label_tag :type, 'v: Type lot (pechprijs)' %>
+  <%= text_field_tag :type %></br>
+
+  <%= submit_tag("Bereken") %>
+<% end %>
+

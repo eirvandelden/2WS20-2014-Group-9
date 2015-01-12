@@ -1,5 +1,6 @@
 class CalculateController < ApplicationController
   PRIZE_MONEY = { 6 => 0, 5 => 50, 4 => 25, 3 => 10 }
+  LOSER_MONEY = { 1 => 2.5, 2 => 5.0, 3 => 7.5 }
 
   def index
   end
@@ -48,8 +49,34 @@ class CalculateController < ApplicationController
     @result = calc_weekly_value six, five, four, three, other, p, a, b, c
   end
 
-#expected_value_week
-#expected_value_total
+  def variance_value_lottery
+    sigma = params[:type].to_i
+    p = params[:probability].to_f
+
+    @result = calc_variance_value_lottery p, sigma
+  end
+
+  def variance_value_loser
+    v = params[:type].to_i
+    p = params[:probability].to_f
+
+    @result = calc_variance_value_loser p, v
+  end
+
+  def weekly_variance
+    six = params[:six].to_i
+    five = params[:five].to_i
+    four = params[:four].to_i
+    three = params[:three].to_i
+    other = params[:other].to_i
+    a = params[:a].to_i
+    b = params[:b].to_i
+    c = params[:c].to_i
+
+    p = params[:probability].to_f
+
+    @result = calc_weekly_variance six, five, four, three, p, a, b, c
+  end
 
 private
 
@@ -69,13 +96,21 @@ private
     PRIZE_MONEY[v] || 0
   end
 
-  def calc_expected_value_ticket p, sigma
+  def calc_loser_money v
+    LOSER_MONEY[v] || 0
+  end
+
+  def calc_expected_value_ticket p, sigma, squared = false
     result_v = 0
     result_x = 0
 
     for x in 0..6 do
       for v in 0..sigma do
-        result_v += calc_prize_money(v) * calc_checked_boxes(v, x, sigma)
+        if squared
+          result_v += (calc_prize_money(v) ** 2 ) * calc_checked_boxes(v, x, sigma)
+        else
+          result_v += calc_prize_money(v) * calc_checked_boxes(v, x, sigma)
+        end
       end
       result_x += result_v * calc_complaintfree_days(x, p)
       result_v = 0
@@ -92,5 +127,23 @@ private
     (a * 2.5 * calc_complaintfree_days(6, p)) +
     (b * 5.0 * calc_complaintfree_days(6, p)) +
     (c * 7.5 * calc_complaintfree_days(6, p))
+  end
+
+  def calc_variance_value_lottery p, sigma
+    calc_expected_value_ticket(p, sigma, true) - calc_expected_value_ticket(p, sigma)
+  end
+
+  def calc_variance_value_loser p, v
+     ((calc_loser_money(v) ** 2) * calc_complaintfree_days(6, p)) - (calc_loser_money(v) * calc_complaintfree_days(6, p))
+  end
+
+  def calc_weekly_variance six, five, four, three, p, a, b, c
+    ((six ** 2) * calc_variance_value_lottery(p, 6)) +
+    ((five ** 2) * calc_variance_value_lottery(p, 5)) +
+    ((four ** 2) * calc_variance_value_lottery(p, 4)) +
+    ((three ** 2) * calc_variance_value_lottery(p, 3)) +
+    ((a ** 2) * calc_variance_value_loser(p, 1)) +
+    ((b ** 2) * calc_variance_value_loser(p, 2)) +
+    ((c ** 2) * calc_variance_value_loser(p, 3))
   end
 end

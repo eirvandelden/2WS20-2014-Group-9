@@ -9,6 +9,9 @@ Rails.application.routes.draw do
   get 'prize_value' => 'calculate#prize_value'
   get 'expected_value_ticket' => 'calculate#expected_value_ticket'
   get 'weekly_value' => 'calculate#weekly_value'
+  get 'variance_value_loser' => 'calculate#variance_value_loser'
+  get 'variance_value_lottery' => 'calculate#variance_value_lottery'
+  get 'weekly_variance' => 'calculate#weekly_variance'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
