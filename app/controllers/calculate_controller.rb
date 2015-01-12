@@ -86,7 +86,7 @@ private
 
   def calc_weekly_value six, five, four, three, other, p, a, b, c
     (six * calc_expected_value_ticket(p, 6)) +
-    (five  * calc_expected_value_ticket(p, 6)) +
+    (five  * calc_expected_value_ticket(p, 5)) +
     (four  * calc_expected_value_ticket(p, 4)) +
     (three * calc_expected_value_ticket(p, 3)) +
     (a * 2.5 * calc_complaintfree_days(6, p)) +
