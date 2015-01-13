@@ -39,14 +39,17 @@ class CalculateController < ApplicationController
     five = params[:five].to_i
     four = params[:four].to_i
     three = params[:three].to_i
-    other = params[:other].to_i
     a = params[:a].to_i
     b = params[:b].to_i
     c = params[:c].to_i
 
     p = params[:probability].to_f
 
-    @result = calc_weekly_value six, five, four, three, other, p, a, b, c
+    if (six + five + four + three + a + b + c) == 42000
+      @result = calc_weekly_value six, five, four, three, p, a, b, c
+    else
+      @result = "GEEN 42000: #{six}, #{five}, #{four}, #{three}, #{a}, #{b}, #{c}"
+    end
   end
 
   def variance_value_lottery
@@ -75,7 +78,11 @@ class CalculateController < ApplicationController
 
     p = params[:probability].to_f
 
-    @result = calc_weekly_variance six, five, four, three, p, a, b, c
+    if (six + five + four + three + a + b + c) == 42000
+      @result = calc_weekly_variance six, five, four, three, p, a, b, c
+    else
+      @result = "GEEN 42000: #{six}, #{five}, #{four}, #{three}, #{a}, #{b}, #{c}"
+    end
   end
 
 private
@@ -119,7 +126,7 @@ private
     result_x
   end
 
-  def calc_weekly_value six, five, four, three, other, p, a, b, c
+  def calc_weekly_value six, five, four, three, p, a, b, c
     (six * calc_expected_value_ticket(p, 6)) +
     (five  * calc_expected_value_ticket(p, 5)) +
     (four  * calc_expected_value_ticket(p, 4)) +
