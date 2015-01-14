@@ -45,11 +45,7 @@ class CalculateController < ApplicationController
 
     p = params[:probability].to_f
 
-    if (six + five + four + three + a + b + c) <= 3000
-      @result = calc_weekly_value six, five, four, three, p, a, b, c
-    else
-      @result = "Meer dan 3000: #{six}, #{five}, #{four}, #{three}, #{a}, #{b}, #{c}"
-    end
+    @result = calc_weekly_value six, five, four, three, p, a, b, c
   end
 
   def variance_value_lottery
@@ -71,18 +67,13 @@ class CalculateController < ApplicationController
     five = params[:five].to_i
     four = params[:four].to_i
     three = params[:three].to_i
-    other = params[:other].to_i
     a = params[:a].to_i
     b = params[:b].to_i
     c = params[:c].to_i
 
     p = params[:probability].to_f
 
-    if (six + five + four + three + a + b + c) <= 3000
-      @result = calc_weekly_variance six, five, four, three, p, a, b, c
-    else
-      @result = "Meer dan 3000: #{six}, #{five}, #{four}, #{three}, #{a}, #{b}, #{c}"
-    end
+    @result = calc_weekly_variance six, five, four, three, p, a, b, c
   end
 
 private
