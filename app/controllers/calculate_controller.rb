@@ -45,10 +45,10 @@ class CalculateController < ApplicationController
 
     p = params[:probability].to_f
 
-    if (six + five + four + three + a + b + c) == 3000
+    if (six + five + four + three + a + b + c) <= 3000
       @result = calc_weekly_value six, five, four, three, p, a, b, c
     else
-      @result = "GEEN 42000: #{six}, #{five}, #{four}, #{three}, #{a}, #{b}, #{c}"
+      @result = "Meer dan 3000: #{six}, #{five}, #{four}, #{three}, #{a}, #{b}, #{c}"
     end
   end
 
@@ -78,10 +78,10 @@ class CalculateController < ApplicationController
 
     p = params[:probability].to_f
 
-    if (six + five + four + three + a + b + c) == 3000
+    if (six + five + four + three + a + b + c) <= 3000
       @result = calc_weekly_variance six, five, four, three, p, a, b, c
     else
-      @result = "GEEN 42000: #{six}, #{five}, #{four}, #{three}, #{a}, #{b}, #{c}"
+      @result = "Meer dan 3000: #{six}, #{five}, #{four}, #{three}, #{a}, #{b}, #{c}"
     end
   end
 
