@@ -128,11 +128,11 @@ private
   end
 
   def calc_variance_value_lottery p, sigma
-    calc_expected_value_ticket(p, sigma, true) - calc_expected_value_ticket(p, sigma)
+    calc_expected_value_ticket(p, sigma, true) - (calc_expected_value_ticket(p, sigma) ** 2)
   end
 
   def calc_variance_value_loser p, v
-     ((calc_loser_money(v) ** 2) * calc_complaintfree_days(6, p)) - (calc_loser_money(v) * calc_complaintfree_days(6, p))
+     ((calc_loser_money(v) ** 2) * calc_complaintfree_days(6, p)) - ((calc_loser_money(v) * calc_complaintfree_days(6, p)) ** 2)
   end
 
   def calc_weekly_variance six, five, four, three, p, a, b, c
