@@ -1,0 +1,62 @@
+\documentclass[a4paper, oneside, book]{memoir}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage[official]{eurosym}
+\usepackage[dutch]{babel}
+\usepackage[colorlinks]{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage{verbatim}
+\setlength{\parindent}{0pt}
+\usepackage{changepage}
+\usepackage{graphicx}
+
+\title{{\small 2WS20 Modeleer opdracht}\\ \small Groep 9\\ \huge{\textbf{ Knetterende Krasactie}}}
+
+\author{
+  Sander op den Camp\\
+  0803350\\
+  \texttt{l.o.d.camp@student.tue.nl}
+  \and
+  Hugo Vonken\\
+  0860541\\
+  \texttt{h.m.vonken@student.tue.nl}
+  \and
+  Etienne van Delden\\
+  0618959\\
+  \texttt{e.i.r.v.delden@student.tue.nl}
+}
+
+\begin{document}
+\frontmatter
+\maketitle
+\thispagestyle{empty}
+
+\begin{abstract}
+  In dit verslag presenteren wij ons kansmodel voor de knetterende krasactie van het Eindhovens Dagblad (ED). 
+Ons model neemt de verschillende regels van de krasactie in beschouwing samen met de kans dat een krantenbezorger van het ED klachtenvrij loopt. 
+Het gepresenteerde model berekent hoeveel van iedere soort loten uitgedeeld moet worden gebaseerd op het budget van \euro12.300,- en na afloop bieden we een zekerheidsanalyse.
+  
+\begin{comment}
+In this report we present our probability model for the ``End of year'' lottery of the dutch newspaper ``Eindhovens Dagblad'' (ED).
+Our model takes the different rules of the lottery into account, along with the probability of the complaint free performance of the distributors of the ED.
+The presented model calculates how many variants of each lottery ticket must be made, based on the expected budget of \euro12.300,-.
+\end{comment}
+\end{abstract}
+\newpage
+
+\tableofcontents
+
+\include{introduction}
+\mainmatter
+
+\include{scratch-off-lottery}
+\include{model}
+\include{analysis}
+\include{discussion}
+
+\chapter{Bibliografie}
+De code van de door ons samengestelde tool, die we gebruikt hebben om berekeningen uit te voeren, staat op https://github.com/eirvandelden/2WS20-2014-Group-9\\
+
+Verder is gebruik gemaakt van het boek ``Probability and Random Processes'' van G. Grimmett en D. Stirzaker..
+
+\end{document}

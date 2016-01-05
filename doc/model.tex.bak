@@ -1,0 +1,56 @@
+\chapter{Model}\label{cha:model}
+
+Waardefunctie:
+
+
+$X$ = aantal klachteloze vrije dagen\\
+$V$ = aantal vakjes opegngekrast met identieke symbolen\\
+
+\begin{equation}
+  g(v,x,\sigma) =
+  \begin{cases}
+     0 & v = 6\\
+    50 & v = 5\\
+    25 & v = 4\\
+    10 & v = 3\\
+    0 & anders
+  \end{cases}
+\end{equation}
+
+Waardefunctie:
+\begin{equation}
+  g(v,x,\sigma) =
+  \begin{cases}
+     0 & v = 6\\
+    50 & v = 5\\
+    25 & v = 4\\
+    10 & v = 3\\
+    0 & anders
+  \end{cases}
+\end{equation}
+
+Kans op X dezelfde plaatjes, gegeven Y klachtelozen dagen op een lot met Z dezelfde plaatjes
+
+This is a hypergeometric distribution
+\begin{equation}
+  f_{V|X,\Sigma} = \frac{\binom{\sigma}{v}\binom{6 - \sigma}{x-v}}{\binom{6}{x}}
+\end{equation}
+
+
+\begin{math}
+  \mathbb{E}[g(V, x, \sigma)] = $verwachte verlies voor \'e\'en lot van het type $ \sigma
+\end{math}
+
+\begin{equation}
+  \mathbb{E}[g(V, x, \sigma)] = \sum_{x=0}^{6} \Bigg[ \sum_{v \leq \sigma} g(v,x,\sigma) * f_{V|X,\Sigma} \Bigg] \binom{6}{x} p^{x}(1-p)^{6-x}
+\end{equation}
+
+todo:
+1 week: $\alpha$ maal bovenstaande + $\beta$ maal bovenstaande
+
+daarna:
+14 maal week formule
+
+TODO:
+het aantal weken staat "buiten" ons model, dus we gaan er vanuit dat het aantal te winnen prijzen gelijk verdeeld is over de 14 weken.
+

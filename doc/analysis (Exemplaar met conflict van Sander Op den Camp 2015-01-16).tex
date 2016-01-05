@@ -1,0 +1,176 @@
+\chapter{Analyse}\label{cha:analysis}
+
+In dit hoofdstuk passen we het model zodanig aan dat het aansluit op de context van de kraslotenactie. We verfijnen eerst het model door een vergelijking op te stellen van de verwachtingswaarde en de variantie van onze totale uitgaven, bestaande uit verschillende nog te bepalen parameters. Wij proberen een ``juiste'' invulling te geven aan deze parameters door het gedrag te bestuderen van de variantie, wanneer we met deze parameters spelen.
+
+\section{Verwachte uitgave}
+
+We stellen onze vergelijkingen op vanuit het perspectief van het aantal identieke symbolen dat is opengekrast. Elk type lot ($\alpha$ t/m $\zeta$ zoals beschreven in hoofdstuk 2) heeft een vast aantal bedragen dat gewonnen kan worden (bijv. met een lot van het type $\gamma$ kun je \euro25 en \euro10 winnen). We kunnen dan met behulp van de hypergeometrische verdeling $V$ bepalen welk bedrag is gewonnen bij de combinatie van gelijke symbolen. Daarnaast gebruiken we de binomiale verdeling $X$ om het aantal klachteloze vrije dagen erbij te betrekken, waarbij we conditioneel te werk gaan voor $x=0,\ldots,6$.
+
+We moeten dus een functie introduceren die aan een aantal identieke symbolen dat is opengekrast een prijs toekent. We maken hierbij de opmerking dat we bij 6 opengekraste gelijke symbolen geen standaard prijs kunnen noteren. Hier gaan we later afzonderlijk op in en dus noteren we voor nu een gewonnen bedrag van \euro0. Ditzelfde geldt voor loten van het type $\zeta$ waar bonusstapelpunten mee verdiend kunnen worden. Wij defini\"eren de waardefunctie (``prijsfunctie'') $g$ als volgt:
+\begin{equation}
+  g(v|x,\sigma)_{p} =
+  \begin{cases}
+     0 & v = 6\\
+    50 & v = 5\\
+    25 & v = 4\\
+    10 & v = 3\\
+    0 & anders
+  \end{cases}
+\end{equation}
+
+We introduceren nu de nieuwe random variabele $g(V|X,\Sigma)_{p}$. Deze staat voor de door de bezorger gewonnen prijs voor een lot waarop een combinatie van $v$ identieke plaatjes is opengekrast. Hierbij geeft $X$ weer hoeveel klachteloze dagen er in week zijn en $\Sigma$ zegt over welk type lot we het hebben. Tot slot geeft $p$ de kans weer dat er sprake is van een klachteloze vrije dag. Deze kans is variabel tussen de 0,75 en 0,90. We willen voor één lot van het type $\sigma$ graag bepalen wat de verwachte winst is voor de bezorger, ofwel het verwachte ``verlies'' dat wij als organisatie lijden. Gebruikmakende van de conditionele verwachtingswaarde krijgen we dat:
+
+\begin{equation}
+  \mathbb{E}[g(V|X,\Sigma)_{p}] = \sum_{x=0}^{6} \Bigg[ \sum_{v=0}^{\sigma} g(v|x,\sigma)_{p} * f_{V|X,\Sigma}(v|x,\sigma) \Bigg] \binom{6}{x} p^{x}(1-p)^{6-x}
+\end{equation}
+
+Nu we de verwachtingswaarde van één lot van het type $\sigma$ kunnen bepalen, zijn we natuurlijk ook in staat om de verwachtingswaarde van $x$ loten van het type $\sigma$ te bepalen. We introduceren nu een extreem belangrijke som van random variabelen.
+
+\begin{equation}
+\alpha g(V|X,6)_{p} + \beta(V|X,5)_{p} + \gamma g(V|X,4)_{p} + \delta g(V|X,3)_{p} + \zeta g(V|X,0)_{p}
+\end{equation}
+
+Deze som van random variabelen geeft het totale prijzengeld (ofwel onze uitgaven) weer dat met de krasloten gewonnen wordt gedurende precies één week. Het mag echter duidelijk zijn dat deze random variabele nog niet compleet is. Immers zit het geld dat gewonnen wordt in de grote pot van krasloten met 6 identieke symbolen en met de bonusstapelpunten nog niet hierin verwerkt. Bovendien mogen we $\zeta g(V|X,0)_{p}$ weglaten, omdat deze altijd een waarde van 0 aanneemt (dit type lot valt altijd onder de categorie ``anders'' in (3.1)).\\
+
+We bespreken nu eerst hoe we het winnen van de bonusstapelpunten verwerken. We zetten uiteraard de mogelijke gewonnen aantallen stapelpunten om in euro's (respectievelijk \euro2,50; \euro5; \euro7,50; \euro0). We moeten een nieuwe randomvariabele introduceren, namelijk $h(V|X,0)_{p}$. Deze geeft de gewonnen prijs weer van een lot van het type $\zeta$. Verder is de functie $h(v|x,0)_{p}$ als volgt gedefinieerd:
+
+\begin{equation}
+  h(v|x,0)_{p} =
+  \begin{cases}
+    2,50 & x = 6 \mbox{ en ``subtype lot''}= a \\
+    5 & x = 6 \mbox{ en ``subtype lot''}= b \\
+    7,50 & x = 6 \mbox{ en ``subtype lot''}= c \\
+    0 & x = 6 \mbox{ en ``subtype lot''}= d \\
+    0 & \mbox{anders}
+  \end{cases}
+\end{equation}
+
+Indien een lot (van het type $\zeta$) voldoet aan de eisen om stapelpunten te verdienen, kent $h(V|X,0)_{p}$ een aantal van $v$ opengekraste identieke symbolen, gegeven $x$ klachteloze vrije dagen om in een prijs van ofwel \euro2,50, \euro5 of \euro7,50. Merk op dat voor loten van het subtype $d$ de gewonnen prijs altijd gelijk is aan \euro0 en zodoende zal deze parameter niet meer optreden in de resterende vergelijkingen.
+
+Het bepalen van $\mathbb{E}[h(V|X,0)_{p}]$ gaat op dezelfde manier als in (3.2), waarbij we functie g vervangen door functie h. Echter kunnen we deze dubbele sommering hevig versimpelen. Verdeling V is hier namelijk helemaal niet relevant (omdat we nu niet werken met combinaties van opengekraste identieke symbolen) en wat betreft verdeling X, deze geeft alleen een toevoeging aan de verwachtingswaarde wanneer alle zes de vakjes zijn opengekrast, ofwel wanneer $x=6$. Daarom mogen we zeggen dat:
+
+\begin{equation}
+\mathbb{E}[h(V|X,0)_{p}] = h(v|x,0)_{p}*f_{X}(6)
+\end{equation}
+
+We kunnen de som van random variabelen uit (3.3) nu dus aanvullen. Tevens korten we deze vanaf nu af tot $Z_{p}$, waarbij $Z_{p}$ dus staat voor de totale uitgaven (minus de gegarandeerde prijzenpot van \euro6000) gedurende precies één week. Deze luidt:
+
+\begin{equation}
+\begin{aligned}
+Z_{p} = \alpha g(V|X,6)_{p} + \beta g(V|X,5)_{p} + \gamma g(V|X,4)_{p} + \delta g(V|X,3)_{p}  \\ 
++ a*h(V|X,0)_{0,p} +b*h(V|X,0)_{p} +c*h(V|X,0)_{p}
+\end{aligned}
+\end{equation}
+
+De lineariteit van de verwachtingswaarde geeft ons dan:
+
+\begin{equation}
+\begin{aligned}
+	\mathbb{E}\left[Z_{p} \right] &=
+    \alpha\mathbb{E}[g(V|X,6)_{p}] + \beta\mathbb{E}[g(V|X,5)]_{p} \\
+    &\qquad{}+ \gamma\mathbb{E}[g(V|X,4)]_{p} + \delta\mathbb{E}[g(V|X,3)]_{p}  \\
+    &\qquad{}+ a[2,50f_{X}(6)_{p}] + b[5f_{X}(6)_{p}] + c[7,50f_{X}(6)_{p}]
+\end{aligned}
+\end{equation}
+
+Zoals in hoofdstuk 2 behandeld is, gaan we ervan uit dat de 12 hoofdprijzen sowieso gewonnen worden. Daarom mogen we een standaard verlies van $4*250 + 4*500 + 4*750 = 6000$ toevoegen aan de uiteindelijke vergelijking. Om deze uiteindelijke vergelijking op te stellen hoeven we enkel 14 maal vergelijking (3.7) te sommeren voor 14 waarden waarden van $p$. Hierbij tellen we de gegarandeerde \euro6000 op en dit geeft ons de totale verwachtingswaarde van onze totaaluitgaven. We definiëren eerst T als zijnde de random variabele die staat voor de totaaluitgaven. Er geldt:
+
+\begin{equation}
+T = \sum_{i=1}^{14} Z_{p_{i}} + 6000.
+\end{equation}
+
+Met behulp van de lineariteit van de verwachtingswaarde kunnen we nu de gefinaliseerde vergelijking voor de verwachtingswaarde opstellen. Deze luidt:
+
+\begin{equation}
+\begin{aligned}
+\mathbb{E}[T] &=& \mathbb{E}\left[\sum_{i=1}^{14} Z_{p_{i}} + 6000\right]\\
+  &=& \mathbb{E}\left[\sum_{i=1}^{14} Z_{p_{i}} \right] + 6000\\
+  &=&  \sum_{i=1}^{14} \left( \mathbb{E}[Z_{p_{i}}] \right) + 6000
+\end{aligned}
+\end{equation}
+
+Merk op dat we nu niet meer werken met een algemene parameter $p$, maar met een variabele $p_{i}$. Deze geeft de kans weer op een klachteloze vrije dag gedurende de i'de week van de krasactie.
+
+\begin{comment} -----------------------
+Hier zit echter nog niet alles in verwerkt. Allereerst is het logisch dat het verwachte verlies voor loten van het type $\zeta$ gelijk is aan 0. (Daar valt immers niets conventioneels mee te winnen). We voegen nu de speciale prijzen toe aan deze vergelijking. Zoals in hoofdstuk 1 behandeld is, gaan we ervan uit dat de 12 hoofdprijzen sowieso gewonnen worden. Daarom mogen we nu vrij een standaard verlies van $4*250 + 4*500 + 4*750 = 6000$ toevoegen aan de uiteindelijke vergelijking. Omdat we nu per week kijken, laten we deze voor nu even buiten beschouwing. Verder zijn er ook bonusstapelpunten te verdienen voor mensen die een lot van het type $\sigma=0$ hebben ontvangen en die tevens een klachtenloze vrije week hebben gehad. We zetten hier natuurlijk de hoeveelheid stapelpunten om in de hoeveelheid geld die gewonnen kan worden (2,50; 5; 7,50). We zeggen dat er een totaal van $a$ loten zijn die een prijs van 2,50 weggeven, een totaal van $b$ loten die een prijs van 5 weggeven en een totaal van $c$ loten die een prijs van 7,50 weggeven. Omdat deze prijzen alleen weggegeven worden bij loten van het type $\zeta$ hoeven we hier geen rekening te houden met de andere typen loten. Daarom mogen we zeggen dat:
+
+\begin{equation}
+  a+b+c=\zeta
+\end{equation}
+
+De gefinaliseerde vergelijking luidt nu:
+
+\begin{multline}
+    \alpha\mathbb{E}[g(V)]_{6,p} + \beta\mathbb{E}[g(V)]_{5,p} + \gamma\mathbb{E}[g(V)]_{4,p} + \delta\mathbb{E}[g(V)]_{3,p}\\
+        + a2,50f_{X}(6)_{p} + b5f_{X}(6)_{p} + c7,50f_{X}(6)_{p} = \mbox{ verwachte verlies in één week}
+\end{multline}
+
+De reden dat we naar het verwachte verlies per week kijken, is omdat we dan de kans op een klachtenloze vrije dag $p$ per week kunnen veranderen. Dit betekent dat we vegelijking (8) 14 keer moeten sommeren om het uiteindelijke verwachte verlies te bepalen. We korten vergelijking (3.5) voor het gemak even af als $\mathbb{E}_{p_{i}}$, waarbij $p_{i}$ de kans is op een klachteloze dag op een dag in de i'de week. Nu kunnen we een vergelijking opstellen voor de volledige uitgaven over 14 weken:
+
+\begin{equation}
+  \sum_{i=1}^{14} \left( \mathbb{E}_{p_{i}} \right) + 6000\\= \mbox{ totale verwachte verlies over 14 weken}
+\end{equation}
+
+Dit is dus de vergelijking die aangeeft hoeveel het verwachte verlies is dat wij in totaal zullen lijden. De opdrachtgever wenst dat dit verlies gelijk is aan 12.300. Aan ons is dus nu de taak een optimale verdeling te vinden voor $\alpha$, $\beta$, $\gamma$, $\delta$, $\zeta$, $a$, $b$ en $c$ zodanig dat vergelijking (9) gelijk is aan 12.300 en zodanig dat de kans dat deze sterk afwijkt zo klein mogelijk is. 
+\end{comment} -------------------------
+
+\section{Variantie}
+
+In de vorige paragraaf hebben we een vergelijking opgesteld voor de verwachtingswaarde van de uitgaven over 14 weken. We zijn eigenlijk meer geïnteresseerd in de spreiding die aanwezig is, omdat we de opdrachtgever een bepaalde garantie willen bieden dat de uitgaven niet extreem veel zullen afwijken van de verwachtingswaarde. Dit kunnen we onderzoeken door naar de variantie te kijken.\\
+
+Eerst bepalen we de variantie van de afzonderlijke random variabelen. Deze zullen we dadelijk nodig hebben als we de totale variantie willen bepalen. Er geldt per definitie dat:
+
+\begin{eqnarray*}
+  Var(g(V|X,\Sigma)_{p}) &=& \mathbb{E}[g(V|X,\Sigma)_{p}^{2}] - \mathbb{E}[g(V|X,\Sigma)_{p}]^{2}\\
+  &=& \sum_{x=0}^{6} \Bigg[ \sum_{v=0}^{\sigma} g(v|x,\sigma)_{p}^{2} * f_{V|X,\Sigma}(v|x,\sigma) \Bigg] \binom{6}{x} p^{x}(1-p)^{6-x}\\
+  &-&  \left( \sum_{x=0}^{6} \Bigg[ \sum_{v=0}^{\sigma} g(v|x,\sigma)_{p} * f_{V|X,\Sigma}(v|x,\sigma) \Bigg] \binom{6}{x} p^{x}(1-p)^{6-x} \right)^{2}\\
+\end{eqnarray*}
+
+en 
+
+\begin{eqnarray*}
+Var(h(V|X,0)_{p}) &=& \mathbb{E}[h(V|X,0)_{p}^{2}] - \mathbb{E}[h(V|X,0)_{p}]^{2}\\
+&=& h(v|x,0)_{p}^{2}*f_{X}(6) - \left( h(v|x,0)_{p}*f_{X}(6)\right)^{2}.
+\end{eqnarray*}
+
+Wanneer we de totale variantie willen bepalen, sommeren we net als in (3.8) over 14 weken met 14 waarden voor parameter p. We moeten hier de extreem belangrijke aanname maken dat $\{Z_{p_{i}}\}_{i=1}^{14}$ een rij onafhankelijke (dus iid) random variabelen is, zoals al besproken is aan het einde van hoofdstuk 2.1. Vanwege deze eigenschap mogen we nu zeggen dat:
+
+\begin{equation}
+\begin{aligned}
+Var(T) &= Var(\sum_{i=1}^{14} Z_{p_{i}} + 6000)\\
+&= Var\left( \sum_{i=1}^{14} Z_{p_{i}}\right) \\
+&= \sum_{i=1}^{14} Var(Z_{p_{i}}).
+\end{aligned}
+\end{equation}
+
+waarbij, wederom gebruikmakende van de onafahankelijkheid van de r.v'en, geldt dat:
+
+\begin{eqnarray*}
+    Var(Z_{p}) & = & Var[\alpha g(V|X,6)_{p} + \beta(V|X,5)_{p} + \gamma g(V|X,4)_{p} + \delta g(V|X,3)_{p}\\
+    & & + a*h(V|X,0)_{p} +b*h(V|X,0)_{p} +c*h(V|X,0)_{p}] \\  
+    & = & \alpha^{2}Var(g(V|X,6)_{p}) + \beta^{2}Var(g(V|X,5)_{p}) + \gamma^{2}Var(g(V|X,4)_{p}) \\
+    & & + \delta^{2}Var(g(V|X,3)_{p}) + a^{2}Var(h(V|X,0)_{p}) + b^{2}Var(h(V|X,0)_{p}) \\ & & + c^{2}Var(h(V|X,0)_{p})
+\end{eqnarray*}
+
+Merk op dat parameter $d$ wederom geen rol speelt in deze vergelijking, omdat $0^{2}$ uiteraard $0$ blijft.\\
+
+We zijn nu in staat de variantie van de totaaluitgaven in (3.10) uit te werken. Merk op dat we het bedrag van \euro6000 nu weg hebben kunnen laten, omdat deze uiteraard een variantie heeft van 0. We willen natuurlijk dat de variantie zo dicht mogelijk bij 0 ligt om de opdrachtgever zo veel mogelijk zekerheid te bieden. Dit minimaliseringsprobleem pakken we in de volgende paragraaf aan.
+
+\section{Parameteranalyse}
+
+\section{Nauwkeurigheidsmarge}
+
+In de vorige paragraaf hebben we de parameters $\alpha, \beta, \gamma, \delta, a,b,c en d$ vastgesteld. Nu willen we graag bekijken hoeveel zekerheid we het Eindhovens Dagblad kunnen bieden, uitgaande van deze parameters. We doen dit door gebruik te maken van de Centrale limietestelling, waarbij $p$ constant blijft gedurende de gehele periode waarin de krasactie loopt.\\
+
+We zijn benieuwd naar de kans dat, gebruikmakende van ons model en onze parameters, de totale uitgaven onder een bepaald bedrag blijven. Weliswaar zit hierin niet verwerkt dat het bedrag nu ook ver onder het voorgeschreven budget van \euro12.300 kan uitvallen, maar omdat we het vooral belangrijk vinden dat het bedrag van \euro12.300 niet al teveel overschreden worden. 
+
+%\begin{equation*}
+\begin{eqnarray*}
+\mathbb{P}\left(5685 \leq Z_{1} + \ldots + Z_{14} \leq 6915  \right)\\ &= 
+\mathbb{P}\left(\frac{5685 - 14\mu}{\sqrt{14\sigma^{2}}} \leq \frac{Z_{1} + \ldots + Z_{14} - 14\mu }{\sqrt{14\sigma^{2}}} \leq \frac{6915 - 14\mu}{\sqrt{14\sigma^{2}}}\right)\\
+&=
+\mathbb{P}\left(\frac{6915 - 14\mu}{\sqrt{14\sigma^{2}}} \leq Z \leq \frac{6915 - 14\mu}{\sqrt{14\sigma^{2}}}\right)\\
+&= \Phi\left(\frac{5685 - 14\mu}{\sqrt{14\sigma^{2}}}\right)\\
+&= 
+\end{eqnarray*}
+%\end{equation*}

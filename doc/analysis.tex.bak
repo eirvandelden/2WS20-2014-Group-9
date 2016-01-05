@@ -1,0 +1,62 @@
+\chapter{Analyse}\label{cha:analysis}
+\section{Verwachte uitgave}
+
+Verder zijn we natuurlijk geïnteresseerd in de verwachte prijs die gewonnen wordt. Daarom definiëren wij de
+waardefunctie ("prijsfunctie") als volgt:
+\begin{equation}
+  g(v) =
+  \begin{cases}
+     0 & v = 6\\
+    50 & v = 5\\
+    25 & v = 4\\
+    10 & v = 3\\
+    0 & anders
+  \end{cases}
+\end{equation}
+
+Nu de funderingen in plaats zijn, kunnen we ons focussen op datgene waar we naar op zoek zijn. We willen voor een lot van het type $\sigma$ graag bepalen wat de verwachte winst is voor de klant, ofwel het verwachte verlies dat wij als organisatie lijden. Gebruikmakende van de conditionele verwachtingswaarde krijgen we dat:
+
+\begin{equation}
+  \mathbb{E}[g(V)]_{\sigma,p} = \sum_{x=0}^{6} \Bigg[ \sum_{v=0}^{6} g(v) * f_{V|X,\Sigma}(v|x,\sigma) \Bigg] \binom{6}{x} p^{x}(1-p)^{6-x}
+\end{equation}
+
+Hierbij geeft subscript $\sigma$ weer over welk type lot we het hebben en $p$ geeft de kans weer dat er sprake is van een klachteloze vrije dag. Deze kans is variabel tussen de 0,75 en 0,90.
+We zijn nu in staat om al onze informatie te combineren in één grote vergelijking:
+
+\begin{multline}
+    \alpha\mathbb{E}[g(V)]_{6,p} + \beta\mathbb{E}[g(V)]_{5,p} + \gamma\mathbb{E}[g(V)]_{4,p} + \delta\mathbb{E}[g(V)]_{3,p} + \zeta\mathbb{E}[g(V)]_{0,p} \\
+        = \mbox{ verwachte verlies in één week}
+\end{multline}
+
+Hier zit echter nog niet alles in verwerkt. Allereerst is het logisch dat het verwachte verlies voor loten van het type $\zeta$ gelijk is aan 0. (Daar valt immers niets conventioneels mee te winnen). We voegen nu de speciale prijzen toe aan deze vergelijking. Zoals in hoofdstuk 1 behandeld is, gaan we ervan uit dat de 12 hoofdprijzen sowieso gewonnen worden. Daarom mogen we nu vrij een standaard verlies van $4*250 + 4*500 + 4*750 = 6000$ toevoegen aan de uiteindelijke vergelijking. Omdat we nu per week kijken, laten we deze voor nu even buiten beschouwing. Verder zijn er ook bonusstapelpunten te verdienen voor mensen die een lot van het type $\sigma=0$ hebben ontvangen en die tevens een klachtenloze vrije week hebben gehad. We zetten hier natuurlijk de hoeveelheid stapelpunten om in de hoeveelheid geld die gewonnen kan worden (2,50; 5; 7,50). We zeggen dat er een totaal van $a$ loten zijn die een prijs van 2,50 weggeven, een totaal van $b$ loten die een prijs van 5 weggeven en een totaal van $c$ loten die een prijs van 7,50 weggeven. Omdat deze prijzen alleen weggegeven worden bij loten van het type $\zeta$ hoeven we hier geen rekening te houden met de andere typen loten. Daarom mogen we zeggen dat:
+
+\begin{equation}
+  a+b+c=\zeta
+\end{equation}
+
+De gefinaliseerde vergelijking luidt nu:
+
+\begin{multline}
+    \alpha\mathbb{E}[g(V)]_{6,p} + \beta\mathbb{E}[g(V)]_{5,p} + \gamma\mathbb{E}[g(V)]_{4,p} + \delta\mathbb{E}[g(V)]_{3,p}\\
+        + a2,50f_{X}(6)_{p} + b5f_{X}(6)_{p} + c7,50f_{X}(6)_{p} = \mbox{ verwachte verlies in één week}
+\end{multline}
+
+De reden dat we naar het verwachte verlies per week kijken, is omdat we dan de kans op een klachtenloze vrije dag $p$ per week kunnen veranderen. Dit betekent dat we vegelijking (8) 14 keer moeten sommeren om het uiteindelijke verwachte verlies te bepalen. Als we vergelijking (8) voor het gemak even afkorten als $\mathbb{E}_{p}$ krijgen we dus:
+
+\begin{multline}
+  \mathbb{E}_{p}+\mathbb{E}_{p}+\mathbb{E}_{p}+\mathbb{E}_{p}+\mathbb{E}_{p}+\mathbb{E}_{p}+\mathbb{E}_{p}+\mathbb{E}_{p}+\mathbb{E}_{p}+\mathbb{E}_{p}+\mathbb{E}_{p}+\mathbb{E}_{p}+\mathbb{E}_{p}
+  +\mathbb{E}_{p}+6000\\= \mbox{ totale verwachte verlies over 14 weken}
+\end{multline}
+
+Dit is dus de vergelijking die aangeeft hoeveel het verwachte verlies is dat wij in totaal zullen lijden. De opdrachtgever wenst dat dit verlies gelijk is aan 12.300. Aan ons is dus nu de taak een optimale verdeling te vinden voor $\alpha$, $\beta$, $\gamma$, $\delta$, $\zeta$, $a$, $b$ en $c$ zodanig dat vergelijking (9) gelijk is aan 12.300 en zodanig dat de kans dat deze sterk afwijkt zo klein mogelijk is. 
+
+\section{Variantie}
+
+In de vorige paragraaf hebben we een vergelijking opgesteld voor de verwachtingswaarde van de uitgaven over 14 weken. We zijn eigenlijk meer geïnteresseerd in de spreiding die aanwezig is, omdat we de opdrachtgever een bepaalde garantie willen bieden dat de uitgaven niet extreem veel zullen afwijken van de verwachtingswaarde. Dit kunnen we onderzoeken door naar de variantie te kijken. 
+
+\begin{multline}
+    Var(Uitgaven) = Var(\alpha g(V)_{6,p} + \beta g(V)_{5,p}) + \delta\mathbb{E}[g(V)]_{3,p}\\
+        + a2,50f_{X}(6)_{p} + b5f_{X}(6)_{p} + c7,50f_{X}(6)_{p} = \mbox{ verwachte verlies in één week}
+\end{multline}
+
+\section{Parameteranalyse}

@@ -1,0 +1,138 @@
+\documentclass[a4paper, oneside, book]{memoir}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage[official]{eurosym}
+\usepackage[dutch]{babel}
+\usepackage[colorlinks]{hyperref}
+\setlength{\parindent}{0pt} % voor geen indent
+\usepackage[utf8]{inputenc}%voor accenten etc.
+\usepackage[official]{eurosym}
+
+\title{{\small 2WS20 Modeleer opdracht}\\ Knetterende Krasactie}
+\author{
+  Sander op den Camp \qquad {\tiny 0803350} \\
+  Hugo Vonken \qquad {\tiny 0860541} \\
+  Etienne van Delden \qquad {\tiny 0618959}
+}
+
+\begin{document}
+
+\frontmatter
+\maketitle
+\thispagestyle{empty}
+
+\begin{abstract}
+  In this report we present our probability model for the ``End of year'' lottery of the dutch newspaper ``Eindhovens Dagblad'' (ED).
+Our model takes the different rules of the lottery into account, along with the probability of the complaint free performance of the distributors of the ED.
+The presented model calculates how many variants of each lottery ticket must be made, based on the expected budget of \euro12.300,-.
+\end{abstract}
+\newpage
+
+\chapter*{Doelstelling en aannames}
+
+De opdrachtgever heeft ons als taak gegeven om door te geven wat voor loten zij moeten samenstellen en in welke hoeveelheid dit moet gebeuren. In essentie betekent dit dat wij op zoek moeten gaan naar een verdeling van de relevante configuraties van loten. Met "relevante" duiden wij hier op de verschillende categorieën loten die ten opzichte van elkaar verschillen. Dit betekent dat wij geen onderscheid hoeven te maken tussen loten die hetzelfde aantal identieke symbolen bevatten, maar waarbij het symbool verschilt (bijv. een lot met 5 maantjes tegenover een lot met 5 sterretjes). Bovendien betekent dit dat wij ook niet hoeven aan te geven welke positie elke symbool op de kaart krijgt (zoals eerst drie maantjes, dan drie sterretjes tegenover drie sterretjes, dan drie maantjes). Wij hoeven enkel rekening te houden met de hoeveelheden symbolen per kaart. De verschillende configuraties waar wij een onderscheid in maken zijn als volgt:
+
+\begin{enumerate}
+    \item loten met 6 identieke symbolen onder de kraslaag (hoeveelheid: $\alpha$)
+    \item loten met 5 identieke symbolen onder de kraslaag (hoeveelheid: $\beta$)
+    \item loten met 4 identieke symbolen onder de kraslaag (hoeveelheid: $\gamma$)
+    \item loten met 3 identieke symbolen onder de kraslaag (hoeveelheid: $\delta$)
+    \item overige loten (loten met minder dan 3 identieke symbolen) (hoeveelheid: $\zeta$)
+\end{enumerate}
+
+We gaan er hierbij van uit dat mensen niet meer dan één prijs per lot kunnen winnen. Dit betekent dat we typen loten met twee sets van drie identieke symbolen verwaarlozen en niet gaan verspreiden. Een tweede aanname die we maken, is dat de hoofdprijzen van 4 maal 250, 4 maal 500 en 4 maal 750 er sowieso uitgaan. Dit betekent dat wanner minder dan 12 mensen in de pot gaan, de overige loten verloot worden over andere mensen. De reden dat we deze aanname maken is omdat het model hierdoor aanzienlijk versimpeld wordt.\\
+
+Een andere aanname is dat we uit moeten gaan van 3000 bezorgers die over 14 weken een totaal van 42.000 loten nodig hebben. Dit betekent dat de totale hoeveelheid loten gelijk moet zijn aan 42.000, ofwel:
+
+\begin{equation}
+    \alpha+\beta+\gamma+\delta+\zeta=42.000
+\end{equation}
+
+to be continued...
+
+\chapter*{Het model}
+
+$\sigma$ geeft het type lot weer en is als volgt gedefinieerd:
+
+\begin{equation}
+  \sigma =
+  \begin{cases}
+     6  &   6 \mbox{ identieke symbolen}\\
+     5  &   5 \mbox{ identieke symbolen}\\
+     4  &   4 \mbox{ identieke symbolen}\\
+     3  &   3 \mbox{ identieke symbolen}\\
+     0  &   \mbox{anders}
+  \end{cases}
+\end{equation}
+
+Ons model maakt gebruik van de volgende random variabelen:
+
+$X$ = aantal klachteloze vrije dagen\\
+$V$ = aantal vakjes opegngekrast met identieke symbolen\\
+
+X heeft een binomiale verdeling, waarbij we de aanname maken dat er sprake is van zes onafhankelijke dagen:
+
+\begin{equation}
+f_{X}(x)=\binom{6}{x} p^{x}(1-p)^{6-x}
+\end{equation}
+
+V heeft een hypergeometrische verdeling:
+
+\begin{equation}
+  f_{V|X,\Sigma}(v|x,\sigma) = \frac{\binom{\sigma}{v}\binom{6 - \sigma}{x-v}}{\binom{6}{x}}
+\end{equation}
+
+Verder zijn we natuurlijk geïnteresseerd in de verwachte prijs die gewonnen wordt. Daarom definiëren wij de
+waardefunctie ("prijsfunctie") als volgt:
+\begin{equation}
+  g(v) =
+  \begin{cases}
+     0 & v = 6\\
+    50 & v = 5\\
+    25 & v = 4\\
+    10 & v = 3\\
+    0 & anders
+  \end{cases}
+\end{equation}
+
+Nu de funderingen in plaats zijn, kunnen we ons focussen op datgene waar we naar op zoek zijn. We willen voor een lot van het type $\sigma$ graag bepalen wat de verwachte winst is voor de klant, ofwel het verwachte verlies dat wij als organisatie lijden. Gebruikmakende van de conditionele verwachtingswaarde krijgen we dat:
+
+\begin{equation}
+  \mathbb{E}[g(V)]_{\sigma,p} = \sum_{x=0}^{6} \Bigg[ \sum_{v=0}^{6} g(v) * f_{V|X,\Sigma}(v|x,\sigma) \Bigg] \binom{6}{x} p^{x}(1-p)^{6-x}
+\end{equation}
+
+Hierbij geeft subscript $\sigma$ weer over welk type lot we het hebben en $p$ geeft de kans weer dat er sprake is van een klachteloze vrije dag. Deze kans is variabel tussen de 0,75 en 0,90.
+We zijn nu in staat om al onze informatie te combineren in één grote vergelijking:
+
+\begin{multline}
+    \alpha\mathbb{E}[g(V)]_{6,p} + \beta\mathbb{E}[g(V)]_{5,p} + \gamma\mathbb{E}[g(V)]_{4,p} + \delta\mathbb{E}[g(V)]_{3,p} + \zeta\mathbb{E}[g(V)]_{0,p} \\
+        = \mbox{ verwachte verlies in één week}
+\end{multline}
+
+Hier zit echter nog niet alles in verwerkt. Allereerst is het logisch dat het verwachte verlies voor loten van het type $\zeta$ gelijk is aan 0. (Daar valt immers niets conventioneels mee te winnen). We voegen nu de speciale prijzen toe aan deze vergelijking. Zoals in hoofdstuk 1 behandeld is, gaan we ervan uit dat de 12 hoofdprijzen sowieso gewonnen worden. Daarom mogen we nu vrij een standaard verlies van $4*250 + 4*500 + 4*750 = 6000$ toevoegen aan de uiteindelijke vergelijking. Omdat we nu per week kijken, laten we deze voor nu even buiten beschouwing. Verder zijn er ook bonusstapelpunten te verdienen voor mensen die een lot van het type $\sigma=0$ hebben ontvangen en die tevens een klachtenloze vrije week hebben gehad. We zetten hier natuurlijk de hoeveelheid stapelpunten om in de hoeveelheid geld die gewonnen kan worden (2,50; 5; 7,50). We zeggen dat er een totaal van $a$ loten zijn die een prijs van 2,50 weggeven, een totaal van $b$ loten die een prijs van 5 weggeven en een totaal van $c$ loten die een prijs van 7,50 weggeven. Omdat deze prijzen alleen weggegeven worden bij loten van het type $\zeta$ hoeven we hier geen rekening te houden met de andere typen loten. Daarom mogen we zeggen dat:
+
+\begin{equation}
+  a+b+c=\zeta
+\end{equation}
+
+De gefinaliseerde vergelijking luidt nu:
+
+\begin{multline}
+    \alpha\mathbb{E}[g(V)]_{6,p} + \beta\mathbb{E}[g(V)]_{5,p} + \gamma\mathbb{E}[g(V)]_{4,p} + \delta\mathbb{E}[g(V)]_{3,p}\\
+        + af_{X}(6)_{p} + bf_{X}(6)_{p} + cf_{X}(6)_{p} = \mbox{ verwachte verlies in één week}
+\end{multline}
+
+De reden dat we naar het verwachte verlies per week kijken, is omdat we dan de kans op een klachtenloze vrije dag $p$ per week kunnen veranderen. Dit betekent dat we vegelijking (8) 14 keer moeten sommeren om het uiteindelijke verwachte verlies te bepalen. Als we vergelijking (8) voor het gemak even afkorten als $\mathbb{E}_{p}$ krijgen we dus:
+
+\begin{multline}
+  \mathbb{E}_{p}+\mathbb{E}_{p}+\mathbb{E}_{p}+\mathbb{E}_{p}+\mathbb{E}_{p}+\mathbb{E}_{p}+\mathbb{E}_{p}+\mathbb{E}_{p}+\mathbb{E}_{p}+\mathbb{E}_{p}+\mathbb{E}_{p}+\mathbb{E}_{p}+\mathbb{E}_{p}
+  +\mathbb{E}_{p}+6000\\= \mbox{ totale verwachte verlies over 14 weken}
+\end{multline}
+
+Dit is dus de vergelijking die aangeeft hoeveel het verwachte verlies is dat wij in totaal zullen lijden. De opdrachtgever wenst dat dit verlies gelijk is aan 12.300. Aan ons is dus nu de taak een optimale verdeling te vinden voor $\alpha$, $\beta$, $\gamma$, $\delta$, $\zeta$, $a$, $b$ en $c$ zodanig dat vergelijking (9) gelijk is aan 12.300 en zodanig dat de kans dat deze sterk afwijkt zo klein mogelijk is.
+
+\chapter*{Discussie}
+
+De resterende weken gaan wij ons bezig houden met het vinden van een optimale verdeling, zoals besproken aan het einde van het vorige hoofdstuk. We kunnen denken aan verschillende simplificatie algoritmen (LP misschien?) en bovendien moeten we rekening houden met de variantie die we het liefst zo klein mogelijk willen hebben.
+
+\end{document}

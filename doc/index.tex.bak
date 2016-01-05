@@ -1,0 +1,37 @@
+\documentclass[a4paper, oneside, book]{memoir}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage[official]{eurosym}
+\usepackage[dutch]{babel}
+\usepackage[colorlinks]{hyperref}
+
+\title{{\small 2WS20 Modeleer opdracht}\\ Knetterende Krasactie}
+\author{
+  Sander op den Camp \qquad {\tiny 0803350} \\
+  Hugo Vonken \qquad {\tiny } \\
+  Etienne van Delden \qquad {\tiny 0618959}
+}
+
+\begin{document}
+\frontmatter
+\maketitle
+\thispagestyle{empty}
+
+\begin{abstract}
+  In this report we present our probability model for the ``End of year'' lottery of the dutch newspaper ``Eindhovens Dagblad'' (ED).
+Our model takes the different rules of the lottery into account, along with the probability of the complaint free performance of the distributors of the ED.
+The presented model calculates how many variants of each lottery ticket must be made, based on the expected budget of \euro12.300,-.
+\end{abstract}
+\newpage
+
+\tableofcontents
+
+\include{introduction}
+\mainmatter
+
+\include{scratch-off-lottery}
+\include{model}
+\include{analysis}
+\include{discussion}
+
+\end{document}

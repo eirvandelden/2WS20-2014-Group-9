@@ -1,0 +1,84 @@
+\chapter{Model}\label{cha:model}
+
+In dit hoofdstuk `ontwikkelen' we de tools die we nodig zullen hebben voor de analyse. We beschrijven het model dat we gaan gebruken om straks de verdeling van de verspreide loten vast te stellen en maken het bruikbaar door verschillende aannames te maken.
+\section{Opzet en Aannames}
+
+Zoals beschreven in de doelstelling moeten we een verdeling zien te vinden voor de verschillende configuraties van de vespreide loten. Echter zijn er teveel configuraties van loten om bij te houden en daarom beperken wij deze nu tot enkel de relevante configuraties. Met "relevante" duiden wij hier op de verschillende categorieën loten die ten opzichte van elkaar verschillen. Concreter: alle configuraties loten waarvoor het kansmodel gelijk is, voegen wij samen tot één categorie loten. Dit leidt vanzelfsprekend tot de vraag: Wanneer is het kansmodel van twee verschillende configuraties loten hetzelfde?\\
+
+Allereerst geldt dankzij de wijze, waarop prijzen worden weggegeven dat wij geen onderscheid hoeven te maken tussen loten die hetzelfde aantal identieke symbolen bevatten, maar waarbij het symbool verschilt (bijv. een lot met 6 maantjes tegenover een lot met 6 sterretjes). Immers zijn de prijzen die je met deze loten (die verschillende symbolen hebben) gelijk en de kans op het winnen van een prijs is identiek.\\
+
+Om nog meer configuraties samen te kunnen voegen, moeten we eerst een aanname maken, namelijk dat de bezorger op geheel willekeurige wijze kiest welk hokje hij per klachteloze dag openkrast. In de realiteit zal er waarschijnlijk een meerderheid mensen zijn die systematisch van links naar rechts openkrast, maar om dit in ons model te verwerken is extreem moeilijk en bovendien hebben we niet de relevante achtergrondinformatie om hierop in te gaan. Overigens heeft dit waarschijnlijk niet verschrikkelijk veel invloed, omdat winst en verlies elkaar gewoon opheffen.\\
+
+De reden dat we deze aanname maken is omdat wij nu verschillende configuraties met gelijke aantallen symbolen bij elkaar mogen voegen (bijv. een lot met de configuratie '2 maantjes, gevolgd door 4 sterretjes' en een lot met configuratie '1 sterretje, gevolgd door 2 maantjes, gevolgd door 3 sterretjes). Wij hoeven dus geen rekening te houden met welke positie elke symbool op de kaart krijgt. Wij hoeven enkel te kijken naar de hoeveelheden symbolen per kaart. De verschillende configuraties waar wij een onderscheid in maken zijn dan als volgt:
+
+\begin{enumerate}
+    \item loten met 6 identieke symbolen onder de kraslaag (hoeveelheid: $\alpha^{*}$)
+    \item loten met 5 identieke symbolen onder de kraslaag (hoeveelheid: $\beta^{*}$)
+    \item loten met 4 identieke symbolen onder de kraslaag (hoeveelheid: $\gamma^{*}$)
+    \item loten met 3 identieke symbolen onder de kraslaag (hoeveelheid: $\delta^{*}$)
+    \item overige loten (loten met minder dan 3 identieke symbolen) (hoeveelheid: $\zeta^{*}$)
+    \begin{enumerate}
+    \item loten die 25 stapelpunten bieden (hoeveelheid: $a^{*}$)
+    \item loten die 50 stapelpunten bieden (hoeveelheid: $b^{*}$)
+    \item loten die 75 stapelpunten bieden (hoeveelheid: $c^{*}$)
+    \item loten die geen stapelpunten bieden (hoeveelheid: $d^{*}$)
+    \end{enumerate}
+\end{enumerate}
+
+Omdat bonusstapelpunten alleen weggegeven kunnen worden bij loten van het type $\zeta$ hoeven we hier geen rekening te houden met de andere typen loten. Omdat tevens geldt dat met loten van het type $\zeta$ enkel bonusstapelpunten te verdienen zijn, mogen we zeggen dat:
+
+\begin{equation*}
+  a^{*}+b^{*}+c^{*}+d^{*}=\zeta^{*}
+\end{equation*}
+
+We gaan er van uit dat mensen niet meer dan één prijs per lot kunnen winnen. Dit betekent dat we typen loten met twee sets van drie identieke symbolen verwaarlozen en niet gaan verspreiden. Een tweede aanname die we maken, is dat de hoofdprijzen van 4 maal 250, 4 maal 500 en 4 maal 750 er sowieso uitgaan. Dit betekent dat wanneer minder dan 12 mensen in de pot gaan, de overige loten verloot worden over andere mensen. De reden dat we deze aanname maken is omdat de pot met hoofdprijzen de "kern" van de krasactie is, dus als deze er niet uit zouden gaan kunnen mensen zich belazerd voelen (wat we uiteraard willen voorkomen). Bovendien wordt het model hierdoor aanzienlijk versimpeld.\\
+
+Een andere aanname is dat we uit moeten gaan van 3000 bezorgers die over 14 weken een totaal van 42.000 loten nodig hebben. Dit betekent dat de totale hoeveelheid loten gelijk moet zijn aan 42.000, ofwel:
+
+\begin{equation*}
+    \alpha^{*}+\beta^{*}+\gamma^{*}+\delta^{*}+a^{*}+b^{*}+c^{*}+d^{*}=42.000
+\end{equation*}
+
+Overigens maken we tevens de beslissing dat we de loten elke week met dezelfde verdeling verspreiden. Dit vergemakkelijkt het proces van het bepalen van deze parameters straks in de analyse namelijk enorm. Dit betekent dat het totaal aantal verspreide loten in één week gelijk is aan:
+
+\begin{equation*}
+    \alpha+\beta+\gamma+\delta+a+b+c+d=3000
+\end{equation*}
+
+waarbij we om notatieverwarringen tijdens de analyse te voorkomen zeggen dat: $14x=x^{*}$ met $x=\{\alpha,\beta,\gamma,\delta,a,b,c,d\}$ zijnde de hoeveelheid verspreide loten van type `$x$' gedurende één week.\\
+
+Tot slot nemen we aan dat de totale uitgaven gedurende één week onafhankelijke zijn van de totale uitgaven gedurende een andere week. Daarnaast maken we de aanname dat de uitgaven voor loten van een bepaald type onafhankelijk zijn van de uitgaven van loten van een ander type. Dit zijn twee vrij realistische aannames, aangezien de bezorger waarschijnlijk niet met een bepaalde strategie krast. Deze eigenschappen zijn belangrijk voor wanneer we straks de variantie moeten bepalen.
+
+\section{Modelbeschrijving}
+
+Ons model maakt gebruik van de volgende random variabelen:
+
+$X$ = aantal klachteloze vrije dagen\\
+$V$ = aantal vakjes opengekrast met identieke symbolen\\
+
+X heeft een binomiale verdeling, waarbij we de aanname maken dat er sprake is van zes onafhankelijke dagen:
+
+\begin{equation}
+f_{X}(x)_{p} =\binom{6}{x} p^{x}(1-p)^{6-x}
+\end{equation}
+
+Hierbij geeft $p$ weer wat de succeskans is op een klachteloze vrije dag. Omdat deze parameter variabel is noteren we deze als subscript. Merk wel op dat $p$ per week vaststaat en dus maximaal 14 verschillende waarden kan aannemen gedurende de actie.\\
+
+V heeft een hypergeometrische verdeling:
+
+\begin{equation}
+  f_{V|X,\Sigma}(v|x,\sigma) = \frac{\binom{\sigma}{v}\binom{6 - \sigma}{x-v}}{\binom{6}{x}}
+\end{equation}
+
+$\sigma$ geeft het type lot weer en is als volgt gedefinieerd:
+
+\begin{equation}
+  \sigma =
+  \begin{cases}
+     6  &   6 \mbox{ identieke symbolen}\\
+     5  &   5 \mbox{ identieke symbolen}\\
+     4  &   4 \mbox{ identieke symbolen}\\
+     3  &   3 \mbox{ identieke symbolen}\\
+     0  &   \mbox{anders}
+  \end{cases}
+\end{equation}
